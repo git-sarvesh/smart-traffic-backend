@@ -1,13 +1,15 @@
 [build]
-builder = "nixpacks"
+  builder = "NIXPACKS"
 
 [deploy]
-startCommand = "python app.py"
+  startCommand = "python app.py"
 
 [build]
-buildCommand = """
-pip install -r requirements.txt || pip install flask flask-cors scikit-learn joblib requests python-dotenv
-"""
+  buildCommand = """
+    pip install flask flask-cors "scikit-learn>=1.5.0" joblib requests python-dotenv
+  """
 
 [nixpacks]
-nixPkgs = ["python311"]
+  nixPkgs = ['python3']
+  providers = ['nixpacks/python']
+s = ["python311"]
