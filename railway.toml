@@ -1,0 +1,13 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "python app.py"
+
+[build]
+buildCommand = """
+pip install -r requirements.txt || pip install flask flask-cors scikit-learn joblib requests python-dotenv
+"""
+
+[nixpacks]
+nixPkgs = ["python311"]
