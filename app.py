@@ -65,12 +65,11 @@ if traffic_state['active_lane'] != max_lane:
             traffic_state['active_lane'] = max_lane
             traffic_state['remaining_time'] = 10 + (3 * densities[max_lane])
                  traffic_state['lanes'][lane]['density'] = densities[lane]
-    else:
-        traffic_state['remaining_time'] -= 1
-        if traffic_state['remaining_time'] <= 0:
-            traffic_state['emergency_active'] = False
-            traffic_state['remaining_time'] = 22
-
+    traffic_state['remaining_time'] -= 1
+    if traffic_state['remaining_time'] <= 0:
+                traffic_state['emergency_active'] = False
+                traffic_state['remaining_time'] = 22
+    
 def congestion_prediction():
     if model:
         hour = datetime.now().hour
