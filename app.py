@@ -42,10 +42,14 @@ def get_gemini_response(prompt):
     try:
         response = requests.post(GEMINI_URL, headers=headers, json=data, timeout=15)
         if response.status_code == 200:
+                        print(f'Gemini API Status: {response.status_code}, Response: {response.text}')
+            
             return response.json()['candidates'][0]['content']['parts'][0]['text']
         return "Gemini AI: Service temporarily unavailable."
     except:
         return "Gemini AI: Connection error. Check API key."
+                    print(f'Gemini API Exception: {e}')
+        
 
 def simulate_vehicle_detection():
     lanes = ['NORTH', 'SOUTH', 'EAST', 'WEST']
@@ -57,10 +61,10 @@ def simulate_esp32_update():
     if not traffic_state['emergency_active']:
         densities = {lane: random.randint(0, 5) for lane in lanes}
         max_lane = max(densities, key=densities.get)
-        traffic_state['active_lane'] = max_lane
-        traffic_state['remaining_time'] = 10 + (3 * densities[max_lane])
-        for lane in lanes:
-            traffic_state['lanes'][lane]['density'] = densities[lane]
+if traffic_state['active_lane'] != max_lane:
+            traffic_state['active_lane'] = max_lane
+            traffic_state['remaining_time'] = 10 + (3 * densities[max_lane])
+                 traffic_state['lanes'][lane]['density'] = densities[lane]
     else:
         traffic_state['remaining_time'] -= 1
         if traffic_state['remaining_time'] <= 0:
